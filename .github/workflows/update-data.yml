@@ -1,24 +1,35 @@
 name: Update Rakuten Data
 
 on:
-  workflow_dispatch: # 手動で実行できるように
+  schedule:
+    # 毎日 00:00 JST に実行（JST=UTC+9 なので 15:00 UTC）
+    - cron: '0 15 * * *'
+  workflow_dispatch:  # 手動実行ボタン
+
 jobs:
   update:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - run: npm ci
+      - name: Install deps
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
+      # ▼ バッテリーのJSON更新
       - name: Fetch batteries
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: node scripts/fetch-rakuten.js search "モバイルバッテリー" src/data/batteries.json
 
+      # ▼ イヤホンのJSON更新
       - name: Fetch earphones
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
@@ -30,4 +41,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/*.json
           git commit -m "chore: update rakuten data" || echo "No changes"
-          git push
+
+      - name: Push
+        run: git push
