@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # ← これが無いと「Push 権限なし」で赤×になりがち
+  contents: write
 
 jobs:
   update:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0        # push時に必要になることがある
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -64,11 +64,12 @@ jobs:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: node scripts/fetch-rakuten.js search "サウンドバー" src/data/soundbars.json
 
-
       - name: Preview JSON head
         run: |
           head -n 20 src/data/batteries.json || true
           head -n 20 src/data/earphones.json || true
+          head -n 20 src/data/speakers.json || true
+          head -n 20 src/data/soundbars.json || true
 
       - name: Commit changes
         run: |
@@ -79,5 +80,4 @@ jobs:
 
       - name: Push
         run: |
-          # 変更が無い場合も成功で終える
           git push || echo "Nothing to push"
