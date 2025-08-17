@@ -4,14 +4,6 @@ import PrNotice from '../components/PrNotice.astro';
 
 const title = '2025年版：ワイヤレスイヤホンおすすめ5選（仮）';
 const description = '価格・連続再生時間・コーデック対応で “ちょうどいい” イヤホンを比較。';
-
-const items = [
-  { name: 'SoundPEATS A', price: 3980, play: 7, codec: 'AAC', note: '安価で十分' },
-  { name: 'Anker B', price: 7990, play: 9, codec: 'AAC', note: '通勤向け' },
-  { name: 'Sony C', price: 13800, play: 8, codec: 'LDAC', note: '高音質' },
-  { name: 'JBL D', price: 9980, play: 10, codec: 'AAC', note: '低音強め' },
-  { name: 'Apple E', price: 19800, play: 6, codec: 'AAC', note: 'iPhone最適' },
-];
 ---
 
 <Base {title} {description}>
@@ -21,19 +13,49 @@ const items = [
   <table border="1" cellpadding="8" style="border-collapse: collapse; width:100%; margin-top:20px;">
     <thead>
       <tr>
-        <th>商品名</th><th>価格</th><th>連続再生</th><th>コーデック</th><th>特徴</th>
+        <th>商品名</th>
+        <th>価格</th>
+        <th>再生時間</th>
+        <th>対応コーデック</th>
+        <th>特徴</th>
       </tr>
     </thead>
     <tbody>
-      {items.map(i => (
-        <tr>
-          <td>{i.name}</td>
-          <td>¥{i.price.toLocaleString()}</td>
-          <td>{i.play}時間</td>
-          <td>{i.codec}</td>
-          <td>{i.note}</td>
-        </tr>
-      ))}
+      <tr>
+        <td>SoundPEATS Mini Pro</td>
+        <td>¥3,980</td>
+        <td>7時間</td>
+        <td>AAC</td>
+        <td>安価で軽量</td>
+      </tr>
+      <tr>
+        <td>Anker Soundcore Life P3</td>
+        <td>¥7,990</td>
+        <td>9時間</td>
+        <td>AAC</td>
+        <td>通勤通学に人気</td>
+      </tr>
+      <tr>
+        <td>Sony WF-1000XM4</td>
+        <td>¥13,800</td>
+        <td>8時間</td>
+        <td>LDAC</td>
+        <td>ノイキャン最強</td>
+      </tr>
+      <tr>
+        <td>JBL Tune Flex</td>
+        <td>¥9,980</td>
+        <td>10時間</td>
+        <td>AAC</td>
+        <td>低音強めの迫力</td>
+      </tr>
+      <tr>
+        <td>Apple AirPods Pro</td>
+        <td>¥19,800</td>
+        <td>6時間</td>
+        <td>AAC</td>
+        <td>iPhoneとの相性抜群</td>
+      </tr>
     </tbody>
   </table>
 
