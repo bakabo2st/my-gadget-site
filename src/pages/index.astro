@@ -24,9 +24,7 @@ const description = '容量・重さ・価格で “ちょうどいい” モバ
     <tbody>
       <tr>
         <td>
-        <a href="https://example.com/affiliate-link-1" target="_blank" rel="nofollow sponsored noopener">
-          Anker PowerCore 10000
-        </a>
+        <OutLink href={i.url}>{i.name}</OutLink>
       </td>
         <td>10000mAh</td>
         <td>180g</td>
@@ -34,28 +32,28 @@ const description = '容量・重さ・価格で “ちょうどいい” モバ
         <td>コンパクトで持ち運びやすい</td>
       </tr>
       <tr>
-        <td>RAVPower 20000</td>
+        <td><OutLink href={i.url}>{i.name}</OutLink></td>
         <td>20000mAh</td>
         <td>350g</td>
         <td>¥3,999</td>
         <td>大容量で旅行向け</td>
       </tr>
       <tr>
-        <td>cheero Slim 5000</td>
+        <td><OutLink href={i.url}>{i.name}</OutLink></td>
         <td>5000mAh</td>
         <td>120g</td>
         <td>¥1,980</td>
         <td>薄型でポケットに入る</td>
       </tr>
       <tr>
-        <td>Belkin BoostCharge</td>
+        <td><OutLink href={i.url}>{i.name}</OutLink></td>
         <td>10000mAh</td>
         <td>240g</td>
         <td>¥4,500</td>
         <td>USB-C急速充電対応</td>
       </tr>
       <tr>
-        <td>Xiaomi Mi PowerBank</td>
+        <td><OutLink href={i.url}>{i.name}</OutLink></td>
         <td>20000mAh</td>
         <td>330g</td>
         <td>¥2,500</td>
