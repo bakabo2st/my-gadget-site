@@ -58,7 +58,7 @@ jobs:
         with:
           commit-message: "chore: update rakuten data"
           title: "chore: update rakuten data"
-          body: "自動更新ボットがデータを更新しました。"
+          body: "自動更新ボットがデータを更新したよ。"
           branch: "bot/update-rakuten-data"
           delete-branch: true
           add-paths: |
