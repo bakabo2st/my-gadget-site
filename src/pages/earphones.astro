@@ -1,61 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
+import OutLink from '../components/OutLink.astro';
+import items from '../data/earphones.json';
 
-const title = '2025年版：ワイヤレスイヤホンおすすめ5選（仮）';
-const description = '価格・連続再生時間・コーデック対応で “ちょうどいい” イヤホンを比較。';
+const title = '楽天で今人気のワイヤレスイヤホンTOP5（自動取得）';
+const description = 'レビュー数の多い順で上位を抽出。価格とショップ名を素早く比較。';
 ---
-
 <Base {title} {description}>
   <h1>{title}</h1>
   <p>{description}</p>
 
-  <table border="1" cellpadding="8" style="border-collapse: collapse; width:100%; margin-top:20px;">
+  <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:20px;">
     <thead>
-      <tr>
-        <th>商品名</th>
-        <th>価格</th>
-        <th>再生時間</th>
-        <th>対応コーデック</th>
-        <th>特徴</th>
-      </tr>
+      <tr><th>商品名</th><th>価格</th><th>ショップ</th><th>画像</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>¥3,980</td>
-        <td>7時間</td>
-        <td>AAC</td>
-        <td>安価で軽量</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>¥7,990</td>
-        <td>9時間</td>
-        <td>AAC</td>
-        <td>通勤通学に人気</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>¥13,800</td>
-        <td>8時間</td>
-        <td>LDAC</td>
-        <td>ノイキャン最強</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>¥9,980</td>
-        <td>10時間</td>
-        <td>AAC</td>
-        <td>低音強めの迫力</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>¥19,800</td>
-        <td>6時間</td>
-        <td>AAC</td>
-        <td>iPhoneとの相性抜群</td>
-      </tr>
+      {items.map(i => (
+        <tr>
+          <td><OutLink href={i.url}>{i.name}</OutLink></td>
+          <td>¥{Number(i.price).toLocaleString()}</td>
+          <td>{i.shop}</td>
+          <td>{i.image && <img src={i.image} alt={i.name} width="100" />}</td>
+        </tr>
+      ))}
     </tbody>
   </table>
 

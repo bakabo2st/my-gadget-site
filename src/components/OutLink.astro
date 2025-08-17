@@ -1,4 +1,6 @@
 ---
-const { href, children } = Astro.props;
+const { href } = Astro.props;
 ---
-<a href={href} target="_blank" rel="nofollow sponsored noopener">{children}</a>
+<a href={href} target="_blank" rel="nofollow sponsored noopener">
+  <slot />
+</a>

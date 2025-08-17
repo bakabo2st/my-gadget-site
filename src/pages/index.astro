@@ -1,69 +1,35 @@
 ---
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
+import OutLink from '../components/OutLink.astro';
+import items from '../data/batteries.json';
 
-// ページ固有のタイトルと説明（SEOで使われる）
-const title = '2025年版：モバイルバッテリーおすすめ5選（仮）';
-const description = '容量・重さ・価格で “ちょうどいい” モバイルバッテリーを簡単に比較できるページ。';
+const title = '楽天で今人気のモバイルバッテリーTOP5（自動取得）';
+const description = '楽天APIで取得した上位商品を一覧表示。価格とショップ名をサッと確認。';
 ---
-
 <Base {title} {description}>
   <h1>{title}</h1>
   <p>{description}</p>
 
-  <table border="1" cellpadding="8" style="border-collapse: collapse; width:100%; margin-top:20px;">
+  <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:20px;">
     <thead>
-      <tr>
-        <th>商品名</th>
-        <th>容量</th>
-        <th>重さ</th>
-        <th>価格</th>
-        <th>特徴</th>
-      </tr>
+      <tr><th>商品名</th><th>価格</th><th>ショップ</th><th>画像</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-        <OutLink href={i.url}>{i.name}</OutLink>
-      </td>
-        <td>10000mAh</td>
-        <td>180g</td>
-        <td>¥2,999</td>
-        <td>コンパクトで持ち運びやすい</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>20000mAh</td>
-        <td>350g</td>
-        <td>¥3,999</td>
-        <td>大容量で旅行向け</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>5000mAh</td>
-        <td>120g</td>
-        <td>¥1,980</td>
-        <td>薄型でポケットに入る</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>10000mAh</td>
-        <td>240g</td>
-        <td>¥4,500</td>
-        <td>USB-C急速充電対応</td>
-      </tr>
-      <tr>
-        <td><OutLink href={i.url}>{i.name}</OutLink></td>
-        <td>20000mAh</td>
-        <td>330g</td>
-        <td>¥2,500</td>
-        <td>コスパが良い</td>
-      </tr>
+      {items.map(i => (
+        <tr>
+          <td><OutLink href={i.url}>{i.name}</OutLink></td>
+          <td>¥{Number(i.price).toLocaleString()}</td>
+          <td>{i.shop}</td>
+          <td>{i.image && <img src={i.image} alt={i.name} width="100" />}</td>
+        </tr>
+      ))}
     </tbody>
-    <p style="margin-top:20px">
-  ▶ <a href="/my-gadget-site/earphones">ワイヤレスイヤホンおすすめ5選はこちら</a>
-</p>
   </table>
+
+  <p style="margin-top:16px">
+    ▶ <a href="/my-gadget-site/earphones">ワイヤレスイヤホンTOP5はこちら</a>
+  </p>
 
   <PrNotice />
 </Base>
