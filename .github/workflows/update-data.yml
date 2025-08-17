@@ -1,0 +1,55 @@
+name: Update Rakuten Data
+
+on:
+  schedule:
+    - cron: '0 15 * * *' # 毎日 00:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        run: |
+          if [ -z "$RAKUTEN_APP_ID" ]; then
+            echo "RAKUTEN_APP_ID がありません"; exit 1;
+          fi
+
+      - name: Fetch batteries
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
+        run: node scripts/fetch-rakuten.js search "モバイルバッテリー" src/data/batteries.json
+
+      - name: Fetch earphones
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
+        run: node scripts/fetch-rakuten.js search "ワイヤレス イヤホン" src/data/earphones.json
+
+      - name: Fetch speakers
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
+        run: node scripts/fetch-rakuten.js search "Bluetooth スピーカー" src/data/speakers.json
+
+      - name: Fetch soundbars
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
+        run: node scripts/fetch-rakuten.js search "サウンドバー" src/data/soundbars.json
+
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: update rakuten data"
+          title: "chore: update rakuten data"
+          body: "自動更新ボットがデータを更新しました。"
+          branch: "bot/update-rakuten-data"
+          delete-branch: true
+          add-paths: |
+            src/data/*.json
