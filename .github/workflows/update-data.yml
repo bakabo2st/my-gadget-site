@@ -2,22 +2,25 @@ name: Update Rakuten Data
 
 on:
   schedule:
-    - cron: '0 15 * * *' # 毎日 00:00 JST
+    # 毎日 00:00 JST（= 15:00 UTC）
+    - cron: '0 15 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
-  pull-requests: write   # ← PR作成に必要
+  pull-requests: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -30,29 +33,33 @@ jobs:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: |
           if [ -z "$RAKUTEN_APP_ID" ]; then
-            echo "RAKUTEN_APP_ID がありません" && exit 1
+            echo "RAKUTEN_APP_ID がありません（Settings → Secrets → Actions を確認）"; exit 1;
           fi
 
       - name: Fetch batteries
-        env:
-          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
         run: node scripts/fetch-rakuten.js search "モバイルバッテリー" src/data/batteries.json
 
       - name: Fetch earphones
-        env:
-          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
         run: node scripts/fetch-rakuten.js search "ワイヤレス イヤホン" src/data/earphones.json
 
       - name: Fetch speakers
-        env:
-          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
         run: node scripts/fetch-rakuten.js search "Bluetooth スピーカー" src/data/speakers.json
 
       - name: Fetch soundbars
-        env:
-          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        env: { RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }} }
         run: node scripts/fetch-rakuten.js search "サウンドバー" src/data/soundbars.json
 
+      - name: Preview JSON head
+        run: |
+          head -n 3 src/data/batteries.json || true
+          head -n 3 src/data/earphones.json || true
+          head -n 3 src/data/speakers.json || true
+          head -n 3 src/data/soundbars.json || true
+
+      # 直pushはやめてPR方式に一本化
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
