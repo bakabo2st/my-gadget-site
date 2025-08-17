@@ -1,0 +1,63 @@
+---
+const title = '2025年版：モバイルバッテリー おすすめ5選（まずは仮）';
+const desc = '迷ったらこれ。容量・重さ・価格で “ちょうどいい” を選ぶための簡易比較。';
+const items = [
+  { name: 'Anker A', capacity: 10000, weight: 180, price: 2990, note: '軽さ優先' },
+  { name: 'Anker B', capacity: 20000, weight: 350, price: 3990, note: '大容量' },
+  { name: 'XYZ C', capacity: 10000, weight: 210, price: 2480, note: '安さ重視' },
+  { name: 'ABC D', capacity: 15000, weight: 290, price: 3280, note: 'バランス型' },
+  { name: 'Foo E', capacity: 20000, weight: 380, price: 4280, note: '長期外出向け' },
+];
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="description" content={desc} />
+  </head>
+  <body>
+    <main style="max-width:960px;margin:40px auto;padding:0 16px;line-height:1.8;">
+      <h1 style="font-size:clamp(24px,3vw,34px);font-weight:700;margin-bottom:8px;">{title}</h1>
+      <p style="opacity:.8;margin-bottom:24px;">{desc}</p>
+
+      <section style="border:1px solid #eee;border-radius:8px;padding:16px;">
+        <h2 style="font-size:20px;margin:0 0 12px;">まずは比較表（仮データ）</h2>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:left;border-bottom:1px solid #ddd;padding:8px;">製品名</th>
+                <th style="text-align:right;border-bottom:1px solid #ddd;padding:8px;">容量(mAh)</th>
+                <th style="text-align:right;border-bottom:1px solid #ddd;padding:8px;">重さ(g)</th>
+                <th style="text-align:right;border-bottom:1px solid #ddd;padding:8px;">価格(円)</th>
+                <th style="text-align:left;border-bottom:1px solid #ddd;padding:8px;">一言</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map(i => (
+                <tr>
+                  <td style="padding:8px;border-bottom:1px solid #f0f0f0;">{i.name}</td>
+                  <td style="padding:8px;border-bottom:1px solid #f0f0f0;text-align:right;">{i.capacity}</td>
+                  <td style="padding:8px;border-bottom:1px solid #f0f0f0;text-align:right;">{i.weight}</td>
+                  <td style="padding:8px;border-bottom:1px solid #f0f0f0;text-align:right;">{i.price.toLocaleString()}</td>
+                  <td style="padding:8px;border-bottom:1px solid #f0f0f0;">{i.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section style="margin-top:24px;">
+        <h2 style="font-size:20px;margin:0 0 12px;">誰にどれが合う？（超短評）</h2>
+        <ul>
+          <li>軽さ最優先 → <strong>Anker A</strong>（通勤・ライブ遠征に）</li>
+          <li>1日中外 → <strong>ABC D</strong> or <strong>Foo E</strong></li>
+          <li>とにかく安く → <strong>XYZ C</strong></li>
+        </ul>
+        <p style="font-size:14px;opacity:.8;">※PR：このページにはアフィリエイトリンクを含みます。</p>
+      </section>
+    </main>
+  </body>
+</html>
