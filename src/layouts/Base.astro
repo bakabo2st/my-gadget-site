@@ -1,0 +1,20 @@
+---
+const { title = 'my-gadget-site', description = '迷ったらここ。ちょうどいいガジェットを素早く比較。' } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+---
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+  </head>
+  <body style="max-width:960px;margin:40px auto;padding:0 16px;line-height:1.8;">
+    <slot />
+  </body>
+</html>

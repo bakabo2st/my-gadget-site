@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bakabo2st.github.io/my-gadget-site/sitemap-index.xml
