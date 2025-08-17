@@ -18,7 +18,7 @@ const description = '楽天APIで取得した上位商品を一覧表示。価�
     <tbody>
       {items.map(i => (
         <tr>
-          <td><OutLink href={i.url}>{i.name}</OutLink></td>
+          <td><strong><OutLink href={i.url}>{i.name}</OutLink></strong></td>
           <td>¥{Number(i.price).toLocaleString()}</td>
           <td>{i.shop}</td>
           <td>{i.image && <img src={i.image} alt={i.name} width="100" />}</td>
@@ -28,7 +28,10 @@ const description = '楽天APIで取得した上位商品を一覧表示。価�
   </table>
 
   <p style="margin-top:16px">
-    ▶ <a href="/my-gadget-site/earphones">ワイヤレスイヤホンTOP5はこちら</a>
+    { href: '/my-gadget-site/earphones">ワイヤレスイヤホン' },
+    { href: '/my-gadget-site/speakers', label: 'Bluetoothスピーカー' },
+    { href: '/my-gadget-site/soundbars', label: 'サウンドバー' },
+
   </p>
 
   <PrNotice />

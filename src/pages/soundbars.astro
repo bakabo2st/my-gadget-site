@@ -2,14 +2,16 @@
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
 import OutLink from '../components/OutLink.astro';
-import items from '../data/earphones.json';
+import items from '../data/soundbars.json';
 
-const title = '楽天で今人気のワイヤレスイヤホンTOP5（自動取得）';
-const description = 'レビュー数の多い順で上位を抽出。価格とショップ名を素早く比較。';
+const title = '楽天で今人気のサウンドバーTOP5（自動取得）';
+const description = 'テレビの音を手軽にグレードアップ。人気サウンドバーを価格とショップで比較。';
+const updatedAt = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <Base {title} {description}>
   <h1>{title}</h1>
   <p>{description}</p>
+  <p style="font-size:14px;opacity:.7;margin-top:-8px;">（最終更新：{updatedAt}）</p>
 
   <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:20px;">
     <thead>
@@ -27,9 +29,6 @@ const description = 'レビュー数の多い順で上位を抽出。価格と�
     </tbody>
   </table>
 
-  <p style="margin-top:16px">
-    ← <a href="/my-gadget-site/">トップへ戻る</a>
-  </p>
-
+  <p style="margin-top:16px">← <a href="/my-gadget-site/">トップへ戻る</a></p>
   <PrNotice />
 </Base>

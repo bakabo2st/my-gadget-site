@@ -54,6 +54,17 @@ jobs:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: node scripts/fetch-rakuten.js search "ワイヤレス イヤホン" src/data/earphones.json
 
+      - name: Fetch speakers
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        run: node scripts/fetch-rakuten.js search "Bluetooth スピーカー" src/data/speakers.json
+
+      - name: Fetch soundbars
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        run: node scripts/fetch-rakuten.js search "サウンドバー" src/data/soundbars.json
+
+
       - name: Preview JSON head
         run: |
           head -n 20 src/data/batteries.json || true

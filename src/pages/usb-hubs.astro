@@ -2,15 +2,22 @@
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
 import OutLink from '../components/OutLink.astro';
-import items from '../data/earphones.json';
+import items from '../data/usb-hubs.json';
 
-const title = '楽天で今人気のワイヤレスイヤホンTOP5（自動取得）';
-const description = 'レビュー数の多い順で上位を抽出。価格とショップ名を素早く比較。';
+const title = '楽天で今人気のUSBハブTOP5（自動取得）';
+const description = 'ノートPC周りを拡張するUSBハブを、価格とショップでサッと比較。';
+// 最終更新日（ビルド時に生成）
+const updatedAt = new Date().toLocaleDateString('ja-JP', { 
+  year: 'numeric', month: 'long', day: 'numeric' 
+});
 ---
 <Base {title} {description}>
   <h1>{title}</h1>
   <p>{description}</p>
 
+  <p style="font-size:14px;opacity:.7;margin-top:-8px;">
+    （最終更新：{updatedAt}）
+  </p>
   <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:20px;">
     <thead>
       <tr><th>商品名</th><th>価格</th><th>ショップ</th><th>画像</th></tr>
