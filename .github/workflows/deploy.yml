@@ -15,6 +15,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  - name: Debug listing & JSON check
+    run: |
+      node -v
+      npm -v
+      echo "== list key dirs =="
+      ls -la
+      ls -la src || true
+      ls -la src/pages || true
+      ls -la src/components || true
+      ls -la src/layouts || true
+      ls -la src/data || true
+      echo "== head smartwatches.json =="
+      head -n 20 src/data/smartwatches.json || true
+      echo "== JSON parse =="
+      node -e "JSON.parse(require('fs').readFileSync('src/data/smartwatches.json','utf8')); console.log('smartwatches.json OK')"
+
+  - name: Build (verbose)
+    run: npm run build -- --logLevel info
+
   build:
     runs-on: ubuntu-latest
     steps:
