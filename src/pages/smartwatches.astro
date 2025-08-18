@@ -1,30 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
-
+import OutLink from '../components/OutLink.astro';
 import items from '../data/smartwatches.json';
+
+const title = '楽天で今人気のスマートウォッチTOP5（自動取得）';
+const description = '健康管理も通知もこれ1本。人気のスマートウォッチを価格とショップで比較。';
+const updatedAt = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
+<Base {title} {description}>
+  <h1>{title}</h1>
+  <p>{description}</p>
+  <p style="font-size:14px;opacity:.7;margin-top:-8px;">（最終更新：{updatedAt}）</p>
 
-<Base title="スマートウォッチ比較" description="人気のスマートウォッチを一覧で比較できます。">
-  <h1>スマートウォッチ比較</h1>
-  <PrNotice />
-
-  <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:16px;">
+  <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:20px;">
     <thead>
-      <tr>
-        <th>商品名</th>
-        <th>価格</th>
-      </tr>
+      <tr><th>商品名</th><th>価格</th><th>ショップ</th><th>画像</th></tr>
     </thead>
     <tbody>
       {items.map((i) => (
         <tr>
-          <td><strong><a href={i.url} target="_blank" rel="noopener">{i.name}</a></strong></td>
-          <td>{i.price}円</td>
+          <td><strong><OutLink href={i.url}>{i.name}</OutLink></strong></td>
+          <td>¥{Number(i.price).toLocaleString()}</td>
+          <td>{i.shop}</td>
+          <td>{i.image && <img src={i.image} alt={i.name} width="100" />}</td>
         </tr>
       ))}
     </tbody>
   </table>
 
-  <p style="margin-top:12px;font-size:14px;">最終更新日: {new Date().toLocaleDateString('ja-JP')}</p>
+  <p style="margin-top:16px">← <a href="/my-gadget-site/">トップへ戻る</a></p>
+  <PrNotice />
 </Base>

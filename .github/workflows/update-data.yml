@@ -56,6 +56,12 @@ jobs:
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: node scripts/fetch-rakuten.js search "スマートウォッチ" src/data/smartwatches.json
+      # .github/workflows/update-data.yml の fetch 群に追加
+      - name: Fetch smartwatches
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        run: node scripts/fetch-rakuten.js search "スマートウォッチ" src/data/smartwatches.json
+
 
       - name: Write timestamp (ensure diff)
         run: |
