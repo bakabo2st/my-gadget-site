@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PrNotice from '../components/PrNotice.astro';
+
+import data from '../data/smartwatches.json';
+---
+
+<Base title="スマートウォッチ比較" description="人気のスマートウォッチを一覧で比較できます。">
+  <h1>スマートウォッチ比較</h1>
+  <PrNotice />
+
+  <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:16px;">
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>価格</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.map((i) => (
+        <tr>
+          <td><strong><a href={i.url} target="_blank" rel="noopener">{i.name}</a></strong></td>
+          <td>{i.price}円</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <p style="margin-top:12px;font-size:14px;">最終更新日: {new Date().toLocaleDateString('ja-JP')}</p>
+</Base>

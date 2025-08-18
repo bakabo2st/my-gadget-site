@@ -52,6 +52,11 @@ jobs:
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: node scripts/fetch-rakuten.js search "サウンドバー" src/data/soundbars.json
+      - name: Fetch smartwatches
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+        run: node scripts/fetch-rakuten.js search "スマートウォッチ" src/data/smartwatches.json
+
       - name: Write timestamp (ensure diff)
         run: |
           mkdir -p src/data
