@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
 
-import data from '../data/smartwatches.json';
+import items from '../data/smartwatches.json';
 ---
 
 <Base title="スマートウォッチ比較" description="人気のスマートウォッチを一覧で比較できます。">
@@ -17,7 +17,7 @@ import data from '../data/smartwatches.json';
       </tr>
     </thead>
     <tbody>
-      {data.map((i) => (
+      {items.map((i) => (
         <tr>
           <td><strong><a href={i.url} target="_blank" rel="noopener">{i.name}</a></strong></td>
           <td>{i.price}円</td>
