@@ -6,6 +6,11 @@ import items from '../data/batteries.json';
 
 const title = '楽天で今人気のモバイルバッテリーTOP5（自動取得）';
 const description = '楽天APIで取得した上位商品を一覧表示。価格とショップ名をサッと確認。';
+const categories = [
+  { href: '/my-gadget-site/earphones', label: 'ワイヤレスイヤホン' },
+  { href: '/my-gadget-site/speakers', label: 'Bluetoothスピーカー' },
+  { href: '/my-gadget-site/soundbars', label: 'サウンドバー' },
+];
 ---
 <Base {title} {description}>
   <h1>{title}</h1>
@@ -27,12 +32,10 @@ const description = '楽天APIで取得した上位商品を一覧表示。価�
     </tbody>
   </table>
 
-  <p style="margin-top:16px">
-    { href: '/my-gadget-site/earphones', label: 'ワイヤレスイヤホン' },
-    { href: '/my-gadget-site/speakers', label: 'Bluetoothスピーカー' },
-    { href: '/my-gadget-site/soundbars', label: 'サウンドバー' },
-
-  </p>
-
+  <ul>
+    {categories.map(c => (
+      <li><a href={c.href}>{c.label}</a></li>
+    ))}
+  </ul>
   <PrNotice />
 </Base>
