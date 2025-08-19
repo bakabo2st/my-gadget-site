@@ -2,21 +2,16 @@
 import Base from '../layouts/Base.astro';
 import PrNotice from '../components/PrNotice.astro';
 import OutLink from '../components/OutLink.astro';
-import items from '../data/batteries.json';
+import items from '../data/applelike-keyboards.json';
 
-const title = '楽天で今人気のモバイルバッテリーTOP5（自動取得）';
-const description = '楽天APIで取得した上位商品を一覧表示。価格とショップ名をサッと確認。';
-const categories = [
-  { href: '/my-gadget-site/earphones', label: 'ワイヤレスイヤホン' },
-  { href: '/my-gadget-site/speakers', label: 'Bluetoothスピーカー' },
-  { href: '/my-gadget-site/soundbars', label: 'サウンドバー' },
-  { href: '/my-gadget-site/smartwatches', label: 'スマートウォッチ' },
-  { href: '/my-gadget-site/applelike-keyboards', label: 'Apple風キーボード比較' },
-];
+const title = 'Apple風の打鍵感！Windows対応キーボード比較（自動取得）';
+const description = 'Magic Keyboardが好きだけどWindowsユーザー…そんな人向けに、薄型シザー型のおすすめキーボードを比較。';
+const updatedAt = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <Base {title} {description}>
   <h1>{title}</h1>
   <p>{description}</p>
+  <p style="font-size:14px;opacity:.7;margin-top:-8px;">（最終更新：{updatedAt}）</p>
 
   <table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin-top:20px;">
     <thead>
@@ -34,10 +29,6 @@ const categories = [
     </tbody>
   </table>
 
-  <ul>
-    {categories.map(c => (
-      <li><a href={c.href}>{c.label}</a></li>
-    ))}
-  </ul>
+  <p style="margin-top:16px">← <a href="/my-gadget-site/">トップへ戻る</a></p>
   <PrNotice />
 </Base>

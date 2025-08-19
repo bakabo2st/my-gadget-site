@@ -56,11 +56,11 @@ jobs:
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: node scripts/fetch-rakuten.js search "スマートウォッチ" src/data/smartwatches.json
-      # .github/workflows/update-data.yml の fetch 群に追加
-      - name: Fetch smartwatches
+      - name: Fetch Apple-like keyboards
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
-        run: node scripts/fetch-rakuten.js search "スマートウォッチ" src/data/smartwatches.json
+        run: node scripts/fetch-rakuten.js search "Apple風 キーボード" src/data/applelike-keyboards.json
+
 
 
       - name: Write timestamp (ensure diff)
